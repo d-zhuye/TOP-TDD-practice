@@ -1,4 +1,3 @@
-
 const practiceModule = {
   capitalize(str) {
     if (str === "" || !str) return str;
