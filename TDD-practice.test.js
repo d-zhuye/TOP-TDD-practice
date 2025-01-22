@@ -1,4 +1,4 @@
-import { practiceModule, calculator } from "./TDD-practice";
+import { practiceModule, calculator, caesarCipher } from "./TDD-practice";
 
 // Test Problem 1: Capitalize Function
 describe("First character capitalized in string", () => {
@@ -108,5 +108,32 @@ describe("check if all functions exists and accepts valid arguments", () => {
       expect(calculator.divide(-4, -2)).toBe(2);
       expect(calculator.divide(4.4, 2.2)).toBeCloseTo(2);
     })
+  })
+})
+
+//Test Problem 4: Caesar Cipher
+describe("takes a string and shift factor, returns shifted string", () => {
+  test("function exists", () => {
+    expect(caesarCipher.cipher).toBeDefined();
+  })
+  test("throw error for invalid argument", () => {
+    expect(() => caesarCipher.cipher()).toThrow("Empty input. Please enter a string and a number in the arguments.")
+    expect(() => caesarCipher.cipher({One: 1, Two: 2})).toThrow("Invalid input. Please enter a string.")
+    expect(() => caesarCipher.cipher("orange cat", "key")).toThrow("Invalid input. Please enter a number for key.")
+  })
+  test("returns shifted string", () => {
+    expect(caesarCipher.cipher("xyz")).toBe("abc");
+    expect(caesarCipher.cipher("orange cat")).toBe("rudqjh fdw");
+  })
+  test("returns shifted string with preserved lettercase", () => {
+    expect(caesarCipher.cipher("HeLLo")).toBe("KhOOr");
+  })
+  test("returns shifted string with non-alphabet characters unchanged", () => {
+    expect(caesarCipher.cipher("or@ng3 c@7")).toBe("ru@qj3 f@7");
+    expect(caesarCipher.cipher("Hello, World!")).toBe("Khoor, Zruog!");
+  })
+  test("returns shifted string with differing keys", () => {
+    expect(caesarCipher.cipher("orange cat", 4)).toBe("sverki gex");
+    expect(caesarCipher.cipher("orange cat", 10)).toBe("ybkxqo mkd")
   })
 })
