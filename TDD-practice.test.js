@@ -166,18 +166,24 @@ describe("returns object with properties (avg, min, max, len) from a given array
   });
 
   describe("throw error for invalid arguments", () => {
-    const errorMsg = "Invalid input. Please enter an array of numbers."
+    const errorMsg = "Invalid input. Please enter an array of numbers.";
     test("throw error if incorrect data type", () => {
       expect(() => analyzeArray.analyze("a string")).toThrow(errorMsg);
-      expect(() => analyzeArray.analyze({first: 1, second: 2})).toThrow(errorMsg);
+      expect(() => analyzeArray.analyze({ first: 1, second: 2 })).toThrow(
+        errorMsg
+      );
       expect(() => analyzeArray.analyze(undefined)).toThrow(errorMsg);
       expect(() => analyzeArray.analyze()).toThrow(errorMsg);
-    })
+    });
     test("throw error if element(s) in array is NaN", () => {
-      expect(() => analyzeArray.analyze([1, 2, "three", 4, 5])).toThrow(errorMsg);
-      expect(() => analyzeArray.analyze([1, 2, "&", {key: 4}, 5])).toThrow(errorMsg);
-    })
-  })
+      expect(() => analyzeArray.analyze([1, 2, "three", 4, 5])).toThrow(
+        errorMsg
+      );
+      expect(() => analyzeArray.analyze([1, 2, "&", { key: 4 }, 5])).toThrow(
+        errorMsg
+      );
+    });
+  });
 
   const arrayOne = [1, 8, 3, 4, 2, 6];
   const expectedOne = { average: 4, min: 1, max: 8, length: 6 };
@@ -204,5 +210,5 @@ describe("returns object with properties (avg, min, max, len) from a given array
   test("returns object with correct values", () => {
     expect(analyzeArray.analyze(arrayOne)).toEqual(expectedOne);
     expect(analyzeArray.analyze(arrayTwo)).toEqual(expectedTwo);
-  })
+  });
 });
