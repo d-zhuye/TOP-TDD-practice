@@ -9,7 +9,35 @@ const practiceModule = {
     if (!str) return str;
 
     return str.split("").reverse().join("");
+  },
+}
+
+const calculator = {
+  checkArguments(a, b) {
+    if (typeof a !== "number" || typeof b !== "number") {
+      throw new Error ("Invalid inputs. Enter two numbers.");
+    }
+  },
+
+  sum(a, b) {
+    this.checkArguments(a, b);
+    return a + b;
+  },
+
+  subtract(a, b) {
+    this.checkArguments(a, b);
+    return a - b;
+  },
+
+  multiply(a, b) {
+    this.checkArguments(a, b);
+    return a * b;
+  },
+
+  divide(a, b) {
+    this.checkArguments(a, b);
+    return a / b;
   }
 }
 
-export { practiceModule };
+export { practiceModule, calculator };
