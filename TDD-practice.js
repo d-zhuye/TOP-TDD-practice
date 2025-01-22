@@ -49,21 +49,23 @@ const caesarCipher = {
 
     for (let i = 0; i < str.length; i++) {
       let decimal = str.charCodeAt(i);
-  
+
       if (decimal >= 65 && decimal <= 90) {
         ciphered += this.fromUpperCase(decimal, key);
       } else if (decimal >= 97 && decimal <= 122) {
         ciphered += this.fromLowerCase(decimal, key);
       } else {
-        ciphered += String.fromCharCode(decimal)
+        ciphered += String.fromCharCode(decimal);
       }
     }
     return ciphered;
-  }, 
+  },
 
   checkArguments(str, key) {
     if (!str || !key) {
-      throw new Error("Empty input. Please enter a string and a number in the arguments.");
+      throw new Error(
+        "Empty input. Please enter a string and a number in the arguments."
+      );
     }
 
     if (typeof str !== "string") {
@@ -89,8 +91,40 @@ const caesarCipher = {
       if (decimal > 122) decimal = 97;
     }
     return String.fromCharCode(decimal);
-  }  
-  
-}
+  },
+};
 
-export { practiceModule, calculator, caesarCipher };
+const analyzeArray = {
+  analyze(arr) {
+    this.checkArguments(arr);
+    const arrSorted = arr.sort((a, b) => a - b);
+
+    let object = {
+      min: arrSorted[0],
+      max: arrSorted[arr.length - 1],
+      length: arr.length,
+      average: this.findAverage(arrSorted),
+    };
+    return object;
+  },
+
+  checkArguments(arr) {
+    if (!Array.isArray(arr)) {
+      throw new Error("Invalid input. Please enter an array of numbers.");
+    }
+
+    arr.forEach((e) => {
+      if (typeof e !== "number") {
+        throw new Error("Invalid input. Please enter an array of numbers.");
+      }
+    });
+  },
+
+  findAverage(arr) {
+    let avg = arr.reduce((accum, num) => (accum += num / arr.length), 0);
+    avg = Math.round(avg * 100) / 100;
+    return avg;
+  },
+};
+
+export { practiceModule, calculator, caesarCipher, analyzeArray };
